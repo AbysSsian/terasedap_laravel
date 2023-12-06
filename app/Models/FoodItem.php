@@ -14,5 +14,12 @@ class FoodItem extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function getImageURL()
+    {
+        if ($this->image) {
+            return url('storage/' . $this->image);
+        }
+    }
+
     use HasFactory;
 }

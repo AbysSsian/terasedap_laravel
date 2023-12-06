@@ -17,29 +17,29 @@ class FoodItemController extends Controller
     }
 
     public function store(Request $request)
-{
-    // Validation (validate image upload, etc.) goes here
+    {
+        // Validation (validate image upload, etc.) goes here
 
-    // Store food item
-    $foodItem = new FoodItem();
-    $foodItem->name = $request->input('name');
-    $foodItem->price = $request->input('price');
-    $foodItem->description = $request->input('description');
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        
-        //Store the image in the storage folder
-        $path = $image->storeAs('images', $imageName, 'public');
+        // Store food item
+        $foodItem = new FoodItem();
+        $foodItem->name = $request->input('name');
+        $foodItem->price = $request->input('price');
+        $foodItem->description = $request->input('description');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
 
-        $foodItem->image = $path;
+            //Store the image in the storage folder
+            $path = $image->storeAs('images', $imageName, 'public');
+
+            $foodItem->image = $path;
+        }
+        $foodItem->category_id = $request->input('category');
+
+        $foodItem->save();
+
+        return redirect('/add-food-item');
     }
-    $foodItem->category_id = $request->input('category');
-
-    $foodItem->save();
-
-    return redirect('/add-food-item');
-}
 
     public function editForm($id)
     {
@@ -57,13 +57,13 @@ class FoodItemController extends Controller
         $foodItem->name = $request->input('name');
         $foodItem->price = $request->input('price');
         $foodItem->description = $request->input('description');
-        if ($request->hasFile('image')) {
+        if ($request->has('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            
+
             // Store the image in the storage folder
             $path = $image->storeAs('images', $imageName, 'public');
-    
+
             // Delete the previous image if it exists and update the image path
             if ($foodItem->image) {
                 Storage::disk('public')->delete($foodItem->image);
