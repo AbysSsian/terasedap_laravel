@@ -2,7 +2,7 @@
     <a href="{{ route('fooditem.description', ['id' => $item->id]) }}" style="text-decoration-line: none;">
         <div>
             @if($item->image)
-            <img src="{{ asset('images/' . $item->image) }}" alt="{{ $item->name }}">
+            <img src="{{ $item->getImageURL() }}" alt="{{ $item->name }}">
             @else
             <p>No image available</p>
             @endif

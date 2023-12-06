@@ -10,7 +10,7 @@
         </div>
         <a href="{{route('fooditem.description', ['id' => $food->id])}}">
             <div class="item-image">
-                <img src="{{asset('images/'.$food->image)}}" alt="">
+                <img src="{{ $food->getImageURL() }}" alt="">
             </div>
         </a>
         </div>

@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="menu-image">
-            <img src="{{ asset('images/' . $detail->image) }}" alt="{{ $detail->name }}">
+            <img src="{{ $detail->getImageURL() }}" alt="{{ $detail->name }}">
         </div>
     </div>
 </a>
