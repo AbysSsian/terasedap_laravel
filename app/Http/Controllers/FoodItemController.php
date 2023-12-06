@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\FoodItem;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class FoodItemController extends Controller
 {
@@ -16,27 +17,29 @@ class FoodItemController extends Controller
     }
 
     public function store(Request $request)
-    {
-        // Validation (validate image upload, etc.) goes here
+{
+    // Validation (validate image upload, etc.) goes here
 
-        // Store food item
-        $foodItem = new FoodItem();
-        $foodItem->name = $request->input('name');
-        $foodItem->price = $request->input('price');
-        $foodItem->description = $request->input('description');
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $foodItem->image = $imageName;
-        }
-        $foodItem->category_id = $request->input('category');
+    // Store food item
+    $foodItem = new FoodItem();
+    $foodItem->name = $request->input('name');
+    $foodItem->price = $request->input('price');
+    $foodItem->description = $request->input('description');
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        
+        //Store the image in the storage folder
+        $path = $image->storeAs('images', $imageName, 'public');
 
-
-        $foodItem->save();
-
-        return redirect('/add-food-item');
+        $foodItem->image = $path;
     }
+    $foodItem->category_id = $request->input('category');
+
+    $foodItem->save();
+
+    return redirect('/add-food-item');
+}
 
     public function editForm($id)
     {
@@ -57,8 +60,15 @@ class FoodItemController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $foodItem->image = $imageName;
+            
+            // Store the image in the storage folder
+            $path = $image->storeAs('images', $imageName, 'public');
+    
+            // Delete the previous image if it exists and update the image path
+            if ($foodItem->image) {
+                Storage::disk('public')->delete($foodItem->image);
+            }
+            $foodItem->image = $path;
         }
         $foodItem->category_id = $request->input('category');
         $foodItem->save();
