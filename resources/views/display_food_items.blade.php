@@ -57,6 +57,8 @@
 	</div>
     @endforeach
 
+    <x-footer/>
+
     <script>
     function scrollToSection(sectionId) {
         const section = document.getElementById(sectionId);

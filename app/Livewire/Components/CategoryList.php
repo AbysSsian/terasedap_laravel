@@ -3,6 +3,7 @@
 namespace App\Livewire\Components;
 
 use App\Models\Category;
+use App\Models\FoodItem;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -19,16 +20,10 @@ class CategoryList extends Component
         $this->dispatch('edit-category');
     }
 
-    public function delete(Category $delete)
+    public function delete($deletedCategoryId)
     {
-        if (!isset($delete->items)) {
-            $delete->delete();
-            return redirect()->route('admin.category')->with('success', 'Kategori berhasil dihapus.');
-        } else {
-            $message = 'Tidak dapat menghapus kategori karena masih ada item makanan terkait. Silakan hapus item makanan terkait terlebih dahulu.';
-            return redirect()->route('admin.category')->with('error', 'Tidak dapat menghapus kategori yang memiliki item makanan terkait.');
-        }
-        $delete->delete();
+        FoodItem::where("category_id",$deletedCategoryId)->delete();
+        Category::find($deletedCategoryId)->delete();
     }
 
     public function cancelEdit()

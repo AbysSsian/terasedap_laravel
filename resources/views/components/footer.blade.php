@@ -10,19 +10,18 @@
                             IG: @terasedap
                         </a>
                     </div>
-                    <div class="media">
+                    <div class="media"> 
                         <a href="https://wa.me/08111588389" style="color: #e9e9e9; display:flex; align-items:center;">
                             WA: +62 08111588389
                         </a>
                     </div>
-                    {{-- <div class="media">
-                        <x-mdi-email-outline style="width: 15px"  />
-                    </div>
                     <div class="media">
-                        <a href="https://gofood.link/a/yM9kNZf">
-                            Gojek
+                        <img src="{{asset('images/gojek.png')}}" class="logoGojek">
+                        <a href="https://gofood.link/a/yM9kNZf" style="color: #e9e9e9; display:flex; align-items:center;">
+                            gofood 
                         </a>
-                    </div> --}}
+                    </div>
+                   
                 </div> 
             </div>
             <div class="col">
