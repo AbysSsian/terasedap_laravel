@@ -22,7 +22,7 @@ class CategoryList extends Component
 
     public function delete($deletedCategoryId)
     {
-        FoodItem::where("category_id",$deletedCategoryId)->delete();
+        FoodItem::where("category_id", $deletedCategoryId)->delete();
         Category::find($deletedCategoryId)->delete();
     }
 

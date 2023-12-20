@@ -48,6 +48,8 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             return redirect()->route('admin.orders');
+        } else {
+            return redirect()->route('login')->withErrors([]);
         }
     }
 

@@ -53,7 +53,11 @@
             </div>
         @endforeach
     </div>
-    
+    @foreach ($categories as $category)
+        @foreach ($category->items as $menu)
+        <livewire:Components.DeleteMenuModal :menu="$menu" wire:key="{{$menu->id}}" />
+        @endforeach
+    @endforeach
     <script>
         function scrollToSection(sectionId) {
             const section = document.getElementById(sectionId);

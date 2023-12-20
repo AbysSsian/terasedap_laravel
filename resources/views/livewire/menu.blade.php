@@ -14,4 +14,5 @@
         </div>
         <livewire:components.menu-management />
     </div>
+
 </main>
