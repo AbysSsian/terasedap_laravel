@@ -59,9 +59,9 @@ Route::get('/menu', [FoodItemController::class, 'displayAll'])->name('food-items
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/authentication', [AuthController::class, 'authentication'])->name('authentication');
+Route::post('/login', [AuthController::class, 'authentication'])->name('authentication');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/register/signup', [AuthController::class, 'store'])->name('register.store');
+Route::post('/register', [AuthController::class, 'store'])->name('register.store');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
@@ -89,7 +89,9 @@ Route::get('/add-food-item', [FoodItemController::class, 'addFoodItemView'])->mi
 Route::post('/add-food-item', [FoodItemController::class, 'store'])->name('fooditem.store')->middleware('auth', 'admin');
 
 Route::get('/edit_food_item/{id}/edit', [FoodItemController::class, 'editForm'])->name('food-item.edit')->middleware('auth', 'admin');
-Route::put('/edit_food_item/{id}', [FoodItemController::class, 'update'])->name('food-item.update')->middleware('auth', 'admin');
+Route::post('save-menu/{id}', [FoodItemController::class, 'update'])->name('save_menu')->middleware('auth', 'admin');
+
+// Route::put('/edit_food_item/{id}', [FoodItemController::class, 'update'])->name('food-item.update')->middleware('auth', 'admin');
 
 
 Route::delete('/add-food-item/{id}', [FoodItemController::class, 'destroy'])->name('food_items.destroy')->middleware('auth', 'admin');

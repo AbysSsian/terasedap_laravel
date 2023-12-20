@@ -38,20 +38,21 @@ class FoodItemController extends Controller
 
         $foodItem->save();
 
-        return redirect('/add-food-item');
+        return redirect()->route('admin.menu');
     }
 
     public function editForm($id)
     {
-        $foodItem = FoodItem::findOrFail($id);
-        $categories = Category::pluck('name', 'id');
-        return view('edit_food_item', compact('foodItem', 'categories'));
+        $menu = FoodItem::findOrFail($id);
+        $categories = Category::all();
+        return view('edit_food_item', compact('menu', 'categories'));
     }
 
     // Update the edited food item
     public function update(Request $request, $id)
     {
         // Validation (similar to store method) goes here
+        // dd($request);
 
         $foodItem = FoodItem::findOrFail($id);
         $foodItem->name = $request->input('name');
@@ -73,7 +74,7 @@ class FoodItemController extends Controller
         $foodItem->category_id = $request->input('category');
         $foodItem->save();
 
-        return redirect('/add-food-item');
+        return redirect()->route('admin.menu');
     }
 
     // Remove a food item

@@ -1,20 +1,11 @@
-<a href="{{ route('food-item.edit', $detail->id)}}">
-    <div wire:transition class="admin-menu">
-        <div class="menu-detail" style="display: flex; flex-direction:column; justify-content:space-between">
-            <div>
-                {{ $detail->name }}
-            </div>
-            <div>
-                Rp. {{ number_format($detail->price, 0, '', '.')}}
-            </div>
-            <div wire:click="deleteOrder({{$detail->id}})">
-                <button style="z-index: 10; background-color:#565656; border:none; color:#e9e9e9">
-                    <x-iconsax-out-trash style="width:16px;" /> Delete
-                </button>
-            </div>
-        </div>
-        <div class="menu-image">
-            <img src="{{ $detail->getImageURL() }}" alt="{{ $detail->name }}">
-        </div>
+<div class="menu-list">
+    <div class="image-name">
+        <img src="{{ $detail->getImageURL() }}" alt="{{$detail->name}}">
+        <p>{{ $detail->name }}</p>
     </div>
-</a>
+    <div class="price-button">
+        <p>Rp. {{ number_format($detail->price, 0, ',', '.')}}</p>
+        <a href="{{route('food-item.edit', $detail->id)}}" class="menu-edit-button">Edit</a>
+        <button class="delete-button" x-data x-on:click="$dispatch('open-delete-menu-modal', {menuId: '{{$detail->id}}' })">Delete</button>
+    </div>
+</div>
