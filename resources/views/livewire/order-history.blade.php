@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                @foreach ($selectedOrder->items as $item)
+                @foreach ($selectedOrder->items()->withTrashed()->get() as $item)
                 <div style="margin-bottom: 6px;">
                     <div style="padding: 4px;">
                         <div class="item-name">

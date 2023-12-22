@@ -47,7 +47,7 @@ x-transition
                                 </div>
                             </div>
                             <div style="display: flex;overflow-wrap: break-word; max-width:200px; margin-left:10px; margin-bottom:8px;">
-                                {{ nl2br($item->notes) }}
+                                <?= nl2br($item->notes) ?>
                             </div>
                         </div>
                         <div>
@@ -63,9 +63,9 @@ x-transition
             </div>
         </div>
         <div class="modal-footer" style="display:flex; justify-content: space-between;">
-            <button style="color: #fb3c2c; border: none; background: none; display:flex; align-items:center" x-on:click="$dispatch('open-delete-modal', {orderId : '{{$detail->id}}'})" orderId="{{$detail->id}}">
-                <x-iconsax-out-trash style="height: 18px;" /> Cancel Order
-            </button>
+            <a style="color: #bfe5ff; border: none; background-color:#679ff3; padding: 6px 12px; border-radius: 6px; display:flex; align-items:center" href="{{route('initialize.edit', $detail->id)}}">
+                <x-iconsax-out-edit style="height: 18px" /> Edit Order
+            </a>
             <div>
                 @switch($detail->status)
                     @case('unpaid')
