@@ -1,5 +1,5 @@
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/livewire.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/livewire.css')}}">
 @endpush
 <div>
     <button class="cancel-edit-button" wire:click="cancelEdit"><x-iconsax-out-arrow-left-2 style="height: 30px;" />

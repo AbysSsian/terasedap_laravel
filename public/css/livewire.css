@@ -32,9 +32,10 @@ body {
     max-height: 10vh;
     text-align: center;
     width: 100%;
-    img {
-        height: 9vh;
-    }
+}
+
+.logo img {
+    height: 9vh;
 }
 
 .container {
@@ -102,7 +103,7 @@ a {
 
 .image-name img {
     height: 62px;
-    aspect-ratio: 1/1;
+    width: 62px;
     object-fit: cover;
     object-position: 50% 50%;
 }
@@ -154,10 +155,10 @@ a {
     width: 40px;
     height: 40px;
     border: none;
+}
 
-    :hover {
-        cursor: pointer;
-    }
+.menu-button:hover {
+    cursor: pointer;
 }
 
 #sidebar {
@@ -251,7 +252,6 @@ nav {
 
 .input-group {
     display: grid;
-    justify-content: center;
     justify-content: center;
     margin-bottom: 12px;
 }
@@ -390,7 +390,6 @@ nav {
 
 .order-item-quantity button {
     display: flex;
-    align-items: center;
     align-items: center;
     justify-content: center;
     border-radius: 20px;
@@ -532,7 +531,6 @@ footer {
     #menu {
         display: grid;
         justify-items: space-between;
-        justify-items: center;
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
@@ -675,7 +673,7 @@ footer {
 .modal-body {
     font-size: 16px;
     padding: 12px;
-    text-wrap: wrap;
+    text-wrap: normal;
     border-bottom: solid 1px #4f4a45;
 }
 

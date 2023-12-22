@@ -1,6 +1,6 @@
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/livewire.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/livewire.css')}}">
 @endpush
 <div class="admin">
     <div>
