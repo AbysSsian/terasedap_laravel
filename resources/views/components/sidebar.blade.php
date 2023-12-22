@@ -2,9 +2,7 @@
     <button class="menu-button" onclick="toggleSidebar()">
         <x-iconsax-lin-menu />
     </button>
-    <a href="{{ route('food-items')}}" id="logo">
     <x-logo />
-    </a>
 </div>
 
 
@@ -12,9 +10,7 @@
     <button class="menu-button" onclick="toggleSidebar()">
         <x-iconsax-lin-arrow-left-1 />
     </button>
-    <a href="{{route('food-items')}}">
         <x-logo />
-    </a>
     <div class=" greet-admin">
         <p class="h3">
             Hello, 

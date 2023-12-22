@@ -8,8 +8,9 @@
         <title>{{ $title ?? 'Terasedap' }}</title>
     </head>
     <body>
-        <x-sidebar />
+        <header style="text-align: center">
+            <img src="{{asset('images/terasedap_logo.png')}}" alt="" style="height: 60px;">
+        </header>
         {{ $slot }}
-        {{-- <x-footer /> --}}
     </body>
 </html>

@@ -1,21 +1,23 @@
 <?php
 
-use App\Http\Controllers\Admin\OrderController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\MenuController;
-use App\Http\Controllers\FoodItemController;
-
 use App\Models\Cart;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\URL;
-use App\Http\Controllers\Auth\LoginRegisterController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
-use App\Livewire\Category;
 use App\Livewire\Menu;
 use App\Livewire\Order;
+use App\Livewire\Category;
+use App\Livewire\EditOrder;
+
 use App\Livewire\OrderHistory;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FoodItemController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Auth\LoginRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,12 +85,21 @@ Route::get('/admin/category', Category::class)->name('admin.category')->middlewa
 Route::get('admin/orders', Order::class)->name('admin.orders')->middleware('auth', 'admin');
 Route::get('admin/menu', Menu::class)->name('admin.menu')->middleware('auth', 'admin');
 Route::get('admin/history', OrderHistory::class)->name('admin.history')->middleware('auth', 'admin');
+Route::get('admin/order/edit/initialize/{id}', function ($id) {
+    $url = URL::signedRoute('order.edit', ['id' => $id]);
+
+    return redirect($url);
+})->name('initialize.edit')->middleware('auth', 'admin');
+
+Route::get('admin/order/edit/{id}', EditOrder::class)->name('order.edit')->middleware('auth', 'admin', 'signed');
+
+
 
 
 Route::get('/add-food-item', [FoodItemController::class, 'addFoodItemView'])->middleware('auth', 'admin')->name('add-menu');
 Route::post('/add-food-item', [FoodItemController::class, 'store'])->name('fooditem.store')->middleware('auth', 'admin');
 
-Route::get('/edit_food_item/{id}/edit', [FoodItemController::class, 'editForm'])->name('food-item.edit')->middleware('auth', 'admin');
+Route::get('/admin/menu/edit/{id}', [FoodItemController::class, 'editForm'])->name('food-item.edit')->middleware('auth', 'admin');
 Route::post('save-menu/{id}', [FoodItemController::class, 'update'])->name('save_menu')->middleware('auth', 'admin');
 
 // Route::put('/edit_food_item/{id}', [FoodItemController::class, 'update'])->name('food-item.update')->middleware('auth', 'admin');
@@ -98,11 +109,3 @@ Route::delete('/add-food-item/{id}', [FoodItemController::class, 'destroy'])->na
 
 // Route for displaying the edit form for a food item
 Route::get('/add-food-item/{id}/edit', [FoodItemController::class, 'editForm'])->name('food_items.editForm')->middleware('auth', 'admin');
-
-// Route::get('/show-order', [CartController::class, 'showOrder'])->name('showOrder');
-
-// Route::delete('/orders/{id}', [CartController::class, 'destroy'])->name('orders.destroy');
-// Route::get('/show-order-history', [CartController::class, 'showOrderHistories'])->name('orders.history');
-
-
-// Route::get('/login', [AuthController::class, 'login'])->name('login');
